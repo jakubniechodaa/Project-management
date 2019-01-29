@@ -2,7 +2,7 @@ package com.jakub.demo.controllers;
 
 import com.jakub.demo.entity.User;
 import com.jakub.demo.repositories.UserRepository;
-import com.jakub.demo.services.PasswordService;
+import com.jakub.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -26,7 +25,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
     @Autowired
-    public PasswordService passwordService;
+    public UserService userService;
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -43,28 +42,17 @@ public class UserController {
         if (result.hasErrors()) {
             return "users/signup";
         }
-        passwordService.saveUserHashedPassword(user);
+        userService.saveUser(user);
         return "users/registered";
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
-    public String login(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
+    public String login() {
+//        User user = new User();
+//        model.addAttribute("user", user);
         return "users/signin";
     }
 
-    @PostMapping("/signedin")
-    @ResponseBody
-    public String processLogin(@Valid User user, BindingResult result, Model model) {
-        User username = userRepository.findByUsername(user.getUsername());
-        String exist = Boolean.toString(passwordService.checkPassword(username, user.getPassword()));
-        model.addAttribute("user", user);
 
-//        if (result.hasErrors()) {
-//            return "users/singin";
-//        }
-        return exist;
-        //return "users/registered";
-    }
+
 }
