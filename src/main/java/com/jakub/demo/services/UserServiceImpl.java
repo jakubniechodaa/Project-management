@@ -4,6 +4,7 @@ import com.jakub.demo.entity.Role;
 import com.jakub.demo.entity.User;
 import com.jakub.demo.repositories.RoleRepository;
 import com.jakub.demo.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));

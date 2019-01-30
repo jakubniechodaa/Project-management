@@ -16,11 +16,34 @@
 
 <div class="container">
 
-        <form:form method="post" action="/users/signin">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form:form>
+        <%--<form:form method="post" action="/users/signin">--%>
+            <%--<div><label> User Name : <input type="text" path="username" name="username"/> </label></div>--%>
+            <%--<div><label> Password: <input type="password" path="password" name="password"/> </label></div>--%>
+            <%--<div><input type="submit" value="Sign In"/></div>--%>
+        <%--</form:form>--%>
+
+            <form name='loginForm'
+                  action="<c:url value='/users/signin' />" method='POST'>
+
+                <table>
+                    <tr>
+                        <td>User:</td>
+                        <td><input type='text' name='username'></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type='password' name='password' /></td>
+                    </tr>
+                    <tr>
+                        <td colspan='2'><input name="submit" type="submit"
+                                               value="submit" /></td>
+                    </tr>
+                </table>
+
+                <%--<input type="hidden" name="${_csrf.parameterName}"--%>
+                       <%--value="${_csrf.token}" />--%>
+
+            </form>
 
 </div>
 

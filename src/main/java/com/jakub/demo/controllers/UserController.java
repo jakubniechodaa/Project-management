@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.validation.Valid;
 
 
@@ -19,13 +18,14 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
-    @Autowired
-    public UserService userService;
+
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
@@ -48,10 +48,22 @@ public class UserController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public String login() {
-//        User user = new User();
-//        model.addAttribute("user", user);
+
         return "users/signin";
     }
+
+    @RequestMapping(value = "/signedout")
+    public String signedOut() {
+
+        return "users/signedout";
+    }
+
+    @RequestMapping(value = "/403")
+    public String accessDenied() {
+
+        return "users/accessdenied";
+    }
+
 
 
 

@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -44,17 +45,14 @@ public class User {
 
     private	boolean	enabled = true;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @ManyToMany(fetch = FetchType.EAGER)// cascade = { CascadeType.ALL }
+//    @JoinTable(name = "user_project", joinColumns = { @JoinColumn(name = "user_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "project_id") })
+    private Set<Project> projects;
 
-    @Override
-    public String toString() {
-        return "Artist{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                '}';
-    }
 }

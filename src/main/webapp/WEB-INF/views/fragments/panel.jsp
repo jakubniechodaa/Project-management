@@ -29,11 +29,7 @@
                     <a class="dropdown-item" href="/users/signin">Sign In</a>
                     <a class="dropdown-item" href="/users/signup">Sign Up</a>
                     <div class="dropdown-divider"></div>
-                    <form:form class="dropdown-item" method="post" action="/logout" name="formulare">
-                        <input type="submit" value="Sing Out"/>
-                    </form:form>
-
-                    <%--<a class="dropdown-item" href="/users/singout">Sing Out</a>--%>
+                    <a class="dropdown-item" href="/logout">Sing Out</a>
                 </div>
             </li>
             <li class="nav-item">
