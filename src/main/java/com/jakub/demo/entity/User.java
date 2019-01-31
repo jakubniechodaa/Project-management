@@ -50,7 +50,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.EAGER)// cascade = { CascadeType.ALL }
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 //    @JoinTable(name = "user_project", joinColumns = { @JoinColumn(name = "user_id") },
 //            inverseJoinColumns = { @JoinColumn(name = "project_id") })
     private Set<Project> projects;

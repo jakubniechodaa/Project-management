@@ -7,9 +7,7 @@ import com.jakub.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -37,7 +35,20 @@ public class ProjectServiceImpl implements ProjectService {
         projects.add(project);
         user.setProjects(projects);
         userRepository.save(user);
+    }
 
+    @Override
+    public List<Project> findProjectsByUser(User user){
 
+        List<Project> projects = projectRepository.findProjectsByActive(true);
+        List<Project> userProjects = new ArrayList<>();
+        for (Project project : projects){
+            for(User us : project.getUsers()){
+                if (us.getId() == user.getId()){
+                    userProjects.add(project);
+                }
+            }
+        }
+        return userProjects;
     }
 }

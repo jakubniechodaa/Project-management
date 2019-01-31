@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <link rel="stylesheet" href="styles.css">
@@ -8,14 +11,17 @@
     <title></title>
 </head>
 
+<body>
+<%@ include file="../fragments/header.jsp"  %>
+
 <div class="container">
 
-    <div class="pb-2 mt-4 mb-2 border-bottom banner  bg-dark">
-        <h1 class = "ml-2" style="color: white; text-shadow: 4px 3px 6px #000000;"> crm.</h1>
-    </div>
-
-    <%@ include file="/WEB-INF/views/fragments/panel.jsp"  %>
+added
 
 </div>
 
+<div>
+    <%@ include file="../fragments/footer.jsp"  %>
+</div>
+</body>
 </html>

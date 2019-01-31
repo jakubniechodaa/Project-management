@@ -6,18 +6,23 @@ import com.jakub.demo.entity.User;
 import com.jakub.demo.repositories.ProjectRepository;
 import com.jakub.demo.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/projects")
+@Secured("ROLE_USER")
 public class ProjectController {
 
     private final ProjectRepository projectRepository;
@@ -49,4 +54,19 @@ public class ProjectController {
         projectService.saveProject(entityUser, project);
         return "projects/added";
     }
+
+    @RequestMapping(value= "/my")
+    public String userProjects(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        User entityUser = currentUser.getUser();
+        model.addAttribute("project", projectService.findProjectsByUser(entityUser));
+        return "projects/my";
+    }
+
+    @RequestMapping(value= "/my/{id}")
+    public String userProjectDetails(@PathVariable long id, Model model) {
+        Project project = projectRepository.findProjectsById(id);
+        model.addAttribute("project", project);
+        return "projects/projectDetails";
+    }
+
 }
