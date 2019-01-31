@@ -28,41 +28,41 @@ public class UserController {
 
 
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String register(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "users/signup";
-    }
-
-    @PostMapping("/registered")
-    public String processForm(@Valid User user, BindingResult result, Model model) {
-
-        model.addAttribute("user", user);
-        if (result.hasErrors()) {
-            return "users/signup";
-        }
-        userService.saveUser(user);
-        return "users/registered";
-    }
-
-    @RequestMapping(value = "/signin", method = RequestMethod.GET)
-    public String login() {
-
-        return "users/signin";
-    }
-
-    @RequestMapping(value = "/signedout")
-    public String signedOut() {
-
-        return "users/signedout";
-    }
-
-    @RequestMapping(value = "/403")
-    public String accessDenied() {
-
-        return "users/accessdenied";
-    }
+//    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+//    public String register(Model model) {
+//        User user = new User();
+//        model.addAttribute("user", user);
+//        return "users/signup";
+//    }
+//
+//    @PostMapping("/registered")
+//    public String processForm(@Valid User user, BindingResult result, Model model) {
+//
+//        model.addAttribute("user", user);
+//        if (result.hasErrors()) {
+//            return "users/signup";
+//        }
+//        userService.saveUser(user);
+//        return "users/registered";
+//    }
+//
+//    @RequestMapping(value = "/signin", method = RequestMethod.GET)
+//    public String login() {
+//
+//        return "users/signin";
+//    }
+//
+//    @RequestMapping(value = "/signedout")
+//    public String signedOut() {
+//
+//        return "users/signedout";
+//    }
+//
+//    @RequestMapping(value = "/403")
+//    public String accessDenied() {
+//
+//        return "users/accessdenied";
+//    }
 
 
 

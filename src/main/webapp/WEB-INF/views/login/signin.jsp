@@ -23,7 +23,7 @@
         <%--</form:form>--%>
 
             <form name='loginForm'
-                  action="<c:url value='/users/signin' />" method='POST'>
+                  action="<c:url value='/login/' />" method='POST'>
 
                 <table>
                     <tr>

@@ -1,5 +1,6 @@
 package com.jakub.demo;
 
+import com.jakub.demo.components.AuthenticationSuccessHandlerImpl;
 import com.jakub.demo.services.SpringDataUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
 @Configuration
@@ -26,6 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SpringDataUserDetailsService();
     }
 
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandlerImpl(){
+        return new AuthenticationSuccessHandlerImpl();
+    }
+
     @Override
     public void configure(AuthenticationManagerBuilder builder)
             throws Exception {
@@ -37,12 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .anyRequest().permitAll()
-                .and().formLogin()
-                .loginPage("/users/signin")
+                .and().formLogin().successHandler(authenticationSuccessHandlerImpl())
+                .loginPage("/login/")
                 .permitAll()
                 .usernameParameter("username").passwordParameter("password")
-                .and().logout().logoutSuccessUrl("/users/signedout")
-                .and().exceptionHandling().accessDeniedPage("/users/403");
+                .and().logout().logoutSuccessUrl("/login/signedout")
+                .and().exceptionHandling().accessDeniedPage("/login/403");
 
 
         http.csrf().disable();

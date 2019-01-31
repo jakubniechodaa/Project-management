@@ -17,7 +17,7 @@
 <div class="container">
 
     <table>
-        <form:form method="post" modelAttribute="user" action="/users/registered" name="formulare">
+        <form:form method="post" modelAttribute="user" action="/login/registered" name="formulare">
             <tr>
                 <td>username:</td>
                 <td><form:input path="username" /></td>

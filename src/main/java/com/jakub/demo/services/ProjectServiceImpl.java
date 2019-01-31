@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -25,11 +26,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void saveProject(User user, Project project) {
 
-        HashSet<User> users = new HashSet<>(Arrays.asList(user));
+        //HashSet<User> users = new HashSet<>(Arrays.asList(user));
+        Set<User> users = project.getUsers();
+        users.add(user);
         project.setUsers(users);
         projectRepository.save(project);
 
-        HashSet<Project> projects = new HashSet<>(Arrays.asList(project));
+        //HashSet<Project> projects = new HashSet<>(Arrays.asList(project));
+        Set<Project> projects = user.getProjects();
+        projects.add(project);
         user.setProjects(projects);
         userRepository.save(user);
 
