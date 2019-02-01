@@ -1,6 +1,7 @@
 package com.jakub.demo.controllers;
 
 import com.jakub.demo.CurrentUser;
+import com.jakub.demo.entity.Project;
 import com.jakub.demo.entity.Status;
 import com.jakub.demo.entity.Task;
 import com.jakub.demo.entity.User;
@@ -46,25 +47,25 @@ public class TaskController {
 
 
     @RequestMapping(value= "/add/{id}", method = RequestMethod.GET)
-    public String main(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable long id,Model model) {
+    public String main(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable Long id,Model model) {
+
         Task task = new Task();
         List<Status> statuses = statusRepository.findAllByActive(true);
+        Project project = projectRepository.findProjectsById(id);//java.lang.NumberFormatException: For input string: "styles.css"
         User user = currentUser.getUser();
         model.addAttribute("statuses", statuses);
         model.addAttribute("task", task);
-        model.addAttribute("project.id", id);
-        model.addAttribute("user.id", user.getId() );
+        model.addAttribute("project", project);
+        model.addAttribute("user", user);
         return "tasks/add";
     }
 
     @PostMapping("/added")
     public String processForm(@Valid Task task, BindingResult result, Model model) {
-//        User entityUser = currentUser.getUser();
         model.addAttribute("task", task);
         if (result.hasErrors()) {
             return "tasks/add";
         }
-        //taskService.saveTask(entityUser, task);
         taskRepository.save(task);
         return "tasks/added";
     }

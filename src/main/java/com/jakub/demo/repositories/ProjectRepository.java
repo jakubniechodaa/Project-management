@@ -14,7 +14,7 @@ import java.util.Set;
 @Repository
 public	interface ProjectRepository extends	JpaRepository <Project,Long>	{
 
-    Project findProjectsById(long id);
+    Project findProjectsById(Long id);
 
     List<Project> findProjectsByActive(boolean active);
 

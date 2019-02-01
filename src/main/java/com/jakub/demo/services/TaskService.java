@@ -5,6 +5,5 @@ import com.jakub.demo.entity.User;
 
 
 public interface TaskService {
-    void saveTask(User user, Task task);
 
 }

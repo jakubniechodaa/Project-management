@@ -27,10 +27,5 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
 
-    @Override
-    public void saveTask(User user, Task task) {
-        task.setUser(user);
-        taskRepository.save(task);
-    }
 
 }

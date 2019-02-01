@@ -7,24 +7,29 @@
 <%@ include file="../fragments/header.jsp"  %>
 
 <div class="container">
-    <h3> <%= request.getSession().getAttribute("loggedEnabled") %></h3>
-    <h5>upcomming events(${futureEvents.size()} / 5)</h5>
+    <h5>Your project:</h5>
 <table>
     <th>name</th>  <th>date</th> <th>website</th> <th>description</th>
     <tr>
     <td>${project.getName()}</td>      <td>${project.getDate()}</td> <td>${project.getWebsite()}</td> <td>${project.getDescription()}</td>
     </tr>
-<%--<c:forEach items="${project}" var="pr" begin="0" end="4">--%>
-    <%--<tr>--%>
-        <%--<td>${pr.getName()}</td><td>${pr.getDate()}</td><td>${pr.getId()}</td>--%>
-        <%--&lt;%&ndash;<td>${ev.date}</td> <td>${ev.till}</td> <td><a href="/event/details/${ev.id}">click</a></td>&ndash;%&gt;--%>
-    <%--</tr>--%>
-<%--</c:forEach>--%>
+
 
 </table>
+    <h5>Tasks:</h5>
+    <table>
+        <th>subject</th> <th>status</th> <th>date</th> <th>user</th>
 
+        <c:forEach items="${tasks}" var="tsk">
+            <%--//begin="0" end="4"--%>
+        <tr>
+        <td>${tsk.getSubject()}</td> <td>${tsk.getStatus()}</td> <td>${tsk.getDate()}</td><td>${tsk.getUser().getUsername()}</td>
+        <%--<td>${ev.date}</td> <td>${ev.till}</td> <td><a href="/event/details/${ev.id}">click</a></td>--%>
+        </tr>
+        </c:forEach>
+    </table>
+    <a href="/projects/adduser/${project.getId()}">EDIT</a>
     <a href="/tasks/add/${project.getId()}">ADD TASK</a>
-    <a href="/allupcomming">see all</a>
 </div>
 
 <%@ include file="../fragments/footer.jsp"  %>

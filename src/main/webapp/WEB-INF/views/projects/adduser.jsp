@@ -16,28 +16,34 @@
 
 <div class="container">
 
-    <table>
-        <form:form method="post" modelAttribute="project" action="/projects/added">
-            <tr>
-                <td>name:</td>
-                <td><form:input path="name" /></td>
-                <form:errors path="name" cssStyle="color: red" element="td"/>
-            </tr>
-            <tr>
-                <td>description:</td>
-                <td><form:input path="description" /></td>
-                <form:errors path="description" cssStyle="color: red" element="td"/>
-            </tr>
-            <tr>
-                <td>website:</td>
-                <td><form:input path="website" /></td>
-                <form:errors path="website" cssStyle="color: red" element="td"/>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Register"></td>
-            </tr>
-        </form:form>
-    </table>
+    <%--<table>--%>
+        <%--<form:form method="post" modelAttribute="project" action="/tasks/added">--%>
+            <%--<form:input path="subject" />--%>
+            <%--<form:input path="description" />--%>
+            <%--<form:input type="hidden" path="project.id" value="${project.id}"/>--%>
+            <%--<form:input type="hidden" path="user.id" value="${user.id}"/>--%>
+        <%--status:<form:select itemLabel="name" path="status"--%>
+                            <%--itemValue="id"  items="${statuses}"/>--%>
+            <%--<form:errors path="status" cssStyle="color: red" element="td"/>--%>
+
+        <%--<button>send</button>--%>
+        <%--</form:form>--%>
+
+    <%--</table>--%>
+
+        <table>
+            <form:form method="post" modelAttribute="user" action="/projects/edited">
+                users:<form:select items="${users1}"/>
+                <%--itemLabel="username" path="users"--%>
+                <%--itemValue="id"--%>
+                <%--<form:errors path="users" cssStyle="color: red" element="td"/>--%>
+
+                <tr>
+                    <td><input type="submit" value="Register"></td>
+                </tr>
+
+            </form:form>
+        </table>
 
 </div>
 
