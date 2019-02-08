@@ -32,11 +32,17 @@
     <%--</table>--%>
 
         <table>
-            <form:form method="post" modelAttribute="user" action="/projects/edited">
-                users:<form:select items="${users1}"/>
+            <form:form method="post" modelAttribute="project" action="/projects/edited">
                 <%--itemLabel="username" path="users"--%>
                 <%--itemValue="id"--%>
                 <%--<form:errors path="users" cssStyle="color: red" element="td"/>--%>
+
+                <td>users:</td><td><form:select itemLabel="name" path="users"
+                                                itemValue="id"  items="${users1}"/></td>
+                <form:errors path="users" cssStyle="color: red" element="td"/>
+                <form:hidden path="id" value="${id}"/>
+
+
 
                 <tr>
                     <td><input type="submit" value="Register"></td>

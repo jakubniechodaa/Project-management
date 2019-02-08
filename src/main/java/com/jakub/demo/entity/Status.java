@@ -8,9 +8,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
-//@Getter
-//@Setter
-//@ToString
+@Getter
+@Setter
+@ToString
 @Table(name = "statuses")
 public class Status {
 

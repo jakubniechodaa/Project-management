@@ -98,15 +98,16 @@ public class ProjectController {
         Set<User> set = new HashSet<>();
         set.addAll(users1);
         Project project = projectRepository.findProjectsById(id);
-        model.addAttribute("users1", set);
+       // model.addAttribute("users1", set);
+        model.addAttribute("id", id);
         model.addAttribute("user", user);
         return "projects/adduser";
     }
 
     @PostMapping("/edited")
-    public String processEditedForm(@Valid User user, BindingResult result, Model model) {//@Valid Project project
+    public String processEditedForm(@Valid User user, @Valid Project project, BindingResult result, Model model) {//@Valid Project project
 
-        model.addAttribute("user", user);//project,project
+        model.addAttribute("project", project);//project,project
         if (result.hasErrors()) {
             return "projects/add";//tu rozkminic z ID
         }
